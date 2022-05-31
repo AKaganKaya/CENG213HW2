@@ -19,11 +19,17 @@ int main() {
   // dl.insert('a', 0, 0);
   // dl.insert('b', 1, 0);
   int array[5] = {31,2,41,12,4};
+  int brray[3] = {22,44,66};
   DoubleList<int> dl(array, 5);
+  DoubleList<int> d2(brray, 3);
   dl.insert(11,0,3);
   print(dl);
+  dl.remove(1, Blue);
+  print(dl);
   cout << dl.get(2, Red)->value() << " " << dl.get(4, Blue)->value() << endl;
-
+  dl.append(d2);
+  print(dl);
+  print(d2);
   // char t[] = {'x', 'y'};
   // DoubleList<char> other_dl(t, 2);
   // dl.append(other_dl);

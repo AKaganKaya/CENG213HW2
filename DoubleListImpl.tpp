@@ -90,10 +90,51 @@ typename DoubleList<T>::Node *DoubleList<T>::insert(T value, unsigned redIndex, 
 }
 
 template <typename T>
-void DoubleList<T>::remove(unsigned index, Color color) {}
+void DoubleList<T>::remove(unsigned index, Color color) 
+{
+  Node* tmp = this->head(color);
+  Node* prev = NULL;
+  if(index == 0)
+  {
+    this->mHead[color] = (this->mHead)[color]->next(color);
+  }
+  else
+  {
+
+    for(unsigned i = 0; i < index; i++)
+    {
+      if(tmp != nullptr)
+      {
+        prev = tmp;
+        tmp = tmp->mNext[color];
+      }
+      else
+      {
+        throw InvalidIndexException();
+      }
+    }
+    prev->mNext[color] = tmp->mNext[color];
+  }
+}
 
 template <typename T>
-void DoubleList<T>::append(DoubleList<T> &dl) {}
+void DoubleList<T>::append(DoubleList<T> &dl) 
+{
+  Node* r_tmp = this->head(Red);
+  Node* b_tmp = this->head(Blue);
+  while(r_tmp->next(Red) != nullptr)
+  {
+    r_tmp = r_tmp->next(Red);
+  }
+  r_tmp->mNext[Red] = dl.mHead[Red];
+  dl.mHead[Red] = NULL;
+  while(b_tmp->next(Blue) != nullptr)
+  {
+    b_tmp = b_tmp->next(Blue);
+  }
+  b_tmp->mNext[Blue] = dl.mHead[Blue];
+  dl.mHead[Blue] = NULL;
+}
 
 template <typename T>
 DoubleList<T>::~DoubleList() {}
